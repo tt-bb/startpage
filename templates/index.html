@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>🏁 Startpage</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+        <style>
+            html{
+                background-color: #11998e;
+                background: linear-gradient(
+                  135deg,
+                  #11998e 0%,
+                  #38ef7d 100%
+                ) no-repeat;
+                font-family: Helvetica;
+                color: #FFFFFF;
+                font-size: 1.1em;
+                text-align: center;
+            }
+            main{
+                display: grid;
+                grid-template-columns: auto auto auto;
+                gap: 50px;
+                margin: 50px;
+            }
+            button{
+                text-decoration: none;
+                text-align:center;
+                padding: 4px 12px;
+                border: solid 1px #757575;
+                border-radius: 4px; 
+                font: 18px Helvetica, sans-serif;
+                font-weight: bold;
+                color: #ffffff;
+                background-color: #9E9E9E;
+            }
+            input{
+                padding: 8px;
+                border: solid 1px #757575;
+                border-radius: 4px;
+            }
+            section{
+                border: 1px solid white;
+                width: 400px;
+            }
+            li{
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                padding: 7px;
+            }
+            ul{
+                list-style: none;
+                margin: 0;
+                padding: 5px;
+            }
+
+            #shortcuts{
+                display: grid;
+                grid-template-columns: auto auto auto;
+                gap: 40px;
+                margin: 10px 50px 50px 50px;
+            }
+
+            #shortcuts img{
+                width: 50px;
+                height: 50px;
+            }
+
+            .credit{
+                font-size: 0.5em;
+                margin-top: -25px;
+            }
+            a{
+                color: white;
+                text-decoration: none;
+            }
+
+            #weather img{
+                width: 200px;
+                height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Startpage</h1>
+            <blockquote>
+                {{ quote }}
+                <cite>— {{ author }}</cite>
+            </blockquote>
+
+            <form method="get" id="ddgSearch" action="https://duckduckgo.com/">
+                <input type="hidden" name="kt" value="p"/>
+                <input type="text" name="q" placeholder="Search…" aria-label="Search on DuckDuckGo"/>
+                <button type="submit">Search 🦆</button>
+            </form>
+            <br />
+        </header>
+
+        <main>
+            <!-- NEWS -->
+            <section>
+                <h2>News</h2>
+                <ul>
+
+                    {% for i in range(10) %}
+                    <li title="{{ news['articles'][i]['url'] }}">
+                        <a href="{{ news['articles'][i]['url'] }}">
+                            {{ news["articles"][i]["title"] }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </section>
+
+            <!-- SHORTCUTS -->
+            <section>
+                <h2>Shortcut</h2>
+                <ul id="shortcuts">
+                    <li><a href="https://facebook.com"><img src="/static/icons/facebook.png" /></a></li>
+                    <li><a href="https://twitter.com"><img src="/static/icons/twitter.png" /></a></li>
+                    <li><a href="https://instagram.com"><img src="/static/icons/instagram.png" /></a></li>
+
+                    <li><a href="https://youtube.com"><img src="/static/icons/youtube.png" /></a></li>
+                    <li><a href="https://zestedesavoir.com"><img src="/static/icons/zestedesavoir.png" /></a></li>
+                    <li><a href="https://github.com"><img src="/static/icons/github.png" /></a></li>
+
+                    <li><a href="https://rtl.be"><img src="/static/icons/news.png" /></a></li>
+                    <li><a href="https://rtbf.be"><img src="/static/icons/news.png" /></a></li>
+                    <li><a href="https://freecodecamp.org"><img src="/static/icons/freecodecamp.png" /></a></li>
+                </ul>
+                <p class="credit">Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a>, <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a>, <a href="https://www.freepik.com" title="Freepik">Freepik</a>, <a href="https://www.flaticon.com/authors/pictogramer" title="pictogramer">pictogramer</a>, <a href="https://www.flaticon.com/authors/dickpra" title="dickpra">dickpra</a>, <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+            </section>
+
+            <!-- WEATHER -->
+            <section>
+                <h2>Weather</h2>
+                <ul id="weather">
+                    <li>
+                        <img alt="Weather icon" width="75"
+                             src="http://openweathermap.org/img/wn/{{weather_icon}}@2x.png" />
+                    </li>
+                    <li>Feels like now: {{ temperature }}°C</li>
+                    <li>Weather: {{ weather }}</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <h2>Word of the Day :</h2>
+            <p>
+                <span style="text-transform: uppercase">
+                    {{ word }}
+                </span>
+                : ({{ type_word }}) {{ definition }}</p>
+        </footer>
+    </body>
+</html>
