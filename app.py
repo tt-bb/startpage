@@ -3,7 +3,7 @@ import requests
 import random
 from PyDictionary import PyDictionary
 from random_word import RandomWords
-#import os
+import os
 
 
 app = Flask(__name__, static_url_path='/static')
@@ -21,6 +21,7 @@ def index():
 
     # NEWS
     category = "technology"
+    news_key = os.environ['NEWS_KEY']
     news_url = f"https://newsapi.org/v2/top-headlines?category={category}&pageSize=10&country=us&apiKey={news_key}"
     news_response = requests.get(news_url)
     news_response = news_response.json()
@@ -28,6 +29,7 @@ def index():
     # WEATHER
     lat = "50.620762"
     lon = "5.686150"
+    weather_key = os.environ['WEATHER_KEY']
     weather_url = f"https://api.openweathermap.org/data/2.5/weather?" \
                   f"lat={lat}&lon={lon}&appid={weather_key}&units=metric"
     weather_response = requests.get(weather_url)
